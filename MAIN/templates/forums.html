@@ -15,10 +15,11 @@
             </div>
             <div class="subforum-description subforum-column">
                 <h4><a href="{{forum.get_url}}">{{forum.title}}</a></h4>
-                <p>Description </p>
+                <p>Description {{forum.description}}
+                </p>
             </div>
             <div class="subforum-stats subforum-column center">
-                <span>24 Posts | 12 Topics</span>
+                <span>{{forum.num_posts}} Posts </span>
             </div>
             <div class="subforum-info subforum-column">
                 <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 

@@ -47,6 +47,10 @@ class Category(models.Model):
                 "slug":self.slug
         })
 
+    @property
+    def num_posts(self):
+        Post.objects.filter(categories=self).count()
+
 
 class Post(models.Model):
     title = models.CharField(max_length=400)
