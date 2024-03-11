@@ -30,6 +30,7 @@ class Author(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=400, unique=True, blank=True)
+    description = models.TextField(default="description")
 
     class Meta:
         verbose_name_plural = "categories"
@@ -40,6 +41,11 @@ class Category(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Category, self).save(*args, **kwargs)
+
+        def get_url(self):
+            return reverse("posts", kwargs = {
+                "slug":self.slug
+        })
 
 
 class Post(models.Model):
@@ -63,7 +69,4 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-    def get_url(self):
-        return reverse("detail", kwargs = {
-            "slug":self.slug
-        })
+
