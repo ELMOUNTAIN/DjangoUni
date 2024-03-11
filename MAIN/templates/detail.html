@@ -4,7 +4,7 @@
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="">MyForum - Forums</a> >> <a href="">random subforum</a> >> <a href="{{post.get_url}}">{{post.title}}</a></span>
+            <span><a href="">MyForum - Forums</a> >> <a href="">{{post.categories.all.0}}</a> >> <a href="{{post.categories.all.0.get_url}}">{{post.title}}</a></span>
         </div>
 
         <!--Topic Section-->
@@ -40,21 +40,19 @@
         </div>
 
         <!--Comments Section-->
+
+        {% for comment in post.comments.all %}
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
-                    <div class="username"><a href="">AnotherUser</a></div>
+                    <div class="username"><a href="">{{comment.user.fullname|title}}</a></div>
                     <div>Role</div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>455</u></div>
-                    <div>Points: <u>4586</u></div>
+                    <img src={{comment.user.profile_pic.url}} alt="">
+                    <div>Posts: <u>{{comment.user.num_posts}}</u></div>
+                    <div>Points: <u>{{comment.user.points}}</u></div>
                 </div>
                 <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
+                    {{comment.content}}
                     <br>
                     <div class="comment">
                         <button onclick="showReply()">Reply</button>
@@ -63,39 +61,23 @@
             </div>
         </div>
         <!--Reply Area-->
-        <div class="comment-area hide" id="reply-area">
-            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-            <input type="submit" value="submit">
-        </div>
-
-
-        <!--Another Comment With replies-->
-        <div class="comments-container">
+        {% for reply in comment.replies.all %}
+        <div class="comments-container" style="width: 95%; margin-left:5%;">
             <div class="body">
                 <div class="authors">
-                    <div class="username"><a href="">AnotherUser</a></div>
+                    <div class="username"><a href="">{{reply.user.fullname|title}}</a></div>
                     <div>Role</div>
-                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>455</u></div>
-                    <div>Points: <u>4586</u></div>
+                    <img src="{{reply.user.profile_pic.url}}" alt="">
+                    <div>Posts: <u>{{reply.user.num_posts}}</u></div>
+                    <div>Points: <u>{{reply.user.points}}</u></div>
                 </div>
                 <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
+                    {{reply.content}}
                     <br>
-                    <br>
-                    <div class="comment">
-                        <button onclick="showReply()">Reply</button>
-                    </div>
                 </div>
             </div>
-        </div>
-        <!--Reply Area-->
-        <div class="comment-area hide" id="reply-area">
-            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
-            <input type="submit" value="submit">
         </div>
     </div>
+    {% endfor %}
+    {% endfor %}
     {% endblock content %}

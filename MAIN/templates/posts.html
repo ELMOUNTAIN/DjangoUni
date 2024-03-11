@@ -4,7 +4,7 @@
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="">MyForum - Forums</a> >> <a href="">random subforum</a></span>
+            <span><a href="{% url 'home' %}">MyForum - Forums</a> >> <a href="{{forum.get_url}}">{{forum.title}}</a></span>
         </div>
         <!--Display posts table-->
         <div class="posts-table">
@@ -24,12 +24,12 @@
                     <span>Started by <b><a href="">{{post.user.fullname|title}}</a></b> .</span>
                 </div>
                 <div class="replies">
-                    2 replies <br> {% get_hit_count for post %} views
+                    {{post.num_comments}} Comments <br> {% get_hit_count for post %} views
                 </div>
 
                 <div class="last-reply">
-                    Oct 12 2021
-                    <br>By <b><a href="">User</a></b>
+                    {{post.last_reply.date|date}}
+                    <br>By <b><a href="">{{post.last_reply.user.fullname|title}}</a></b>
                 </div>
             </div>
             {% endfor%}

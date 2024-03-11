@@ -100,4 +100,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-
+    def get_url(self):
+        return reverse("detail", kwargs={
+            "slug":self.slug
+        })
+    
+    @property
+    def num_comments(self):
+        return self.comments.count()
+    
+    @property
+    def last_reply(self):
+        return self.comments.latest("date")
