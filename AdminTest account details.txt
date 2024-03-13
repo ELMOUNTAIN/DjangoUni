@@ -1,5 +1,5 @@
 superuser:
-Admin
+admin
 Meowmeow123
 
 Test acc:
