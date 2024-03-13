@@ -54,6 +54,7 @@ def update_profile(request):
     })
     return render(request, "register/update.html", context)
 
+@login_required
 def logout(request):
     lt(request)
     return redirect ("home")
