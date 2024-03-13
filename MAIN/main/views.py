@@ -9,6 +9,7 @@ def home(request):
         "forums":forums,
     }
     return render(request, "forums.html", context)
+
 def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     context = {

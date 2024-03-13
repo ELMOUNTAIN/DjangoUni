@@ -1,3 +1,6 @@
+I advise this to be run in VSCode with the "Django" extension by Baptiste Dartheny
+
 python AutoDjango.py --venv <-- Starts the virtual Environment
 
 (cd to MAIN) python manage.py runserver
+

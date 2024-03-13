@@ -8,7 +8,7 @@ def signup(request):
     if request.method == "POST":
         if form.is_valid():
             new_user = form.save
-            login(request, new_user)
+            login(request, new_user())
             return redirect("home")
     context.update({
         "form":form,

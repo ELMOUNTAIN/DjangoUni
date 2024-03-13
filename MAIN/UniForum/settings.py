@@ -31,19 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-	'django.contrib.admin',
-	 'django.contrib.auth',
-	 'django.contrib.contenttypes',
-	 'django.contrib.sessions',
-	 'django.contrib.messages',
-	 'django.contrib.staticfiles',
-	 'main',
-     'tinymce',
-     'hitcount',
-     'taggit',
-     'register',
-     'cripsy_forms',
-
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'main',
+    'tinymce',
+    'hitcount',
+    'taggit',
+    'register',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +132,5 @@ else:
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
