@@ -9,5 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', include("main.urls")), 
     path('tinymce/', include('tinymce.urls')),
-    path(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
+    path('account/', include('register.urls')),
+    path('hitcount/', include('hitcount.urls', namespace='hitcount')),
 	]
