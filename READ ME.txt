@@ -1,0 +1,3 @@
+python AutoDjango.py --venv <-- Starts the virtual Environment
+
+(cd to MAIN) python manage.py runserver
