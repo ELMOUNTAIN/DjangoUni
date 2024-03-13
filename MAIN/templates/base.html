@@ -29,7 +29,10 @@
                 </ul>
             </nav>
             <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
-            <div class="brand">My Forum</div>
+            <div class="brand">Retro Video Game Exhange</div>
+            {% if request.user.is_authenticated %}
+            <div style="font-size:50px;font-weight:300px;margin-left:100px;"><a href="{% url 'create_post' %}">+</div>
+            {% endif %}
         </div>
         <!--SearchBox Section-->
         <div class="search-box">
