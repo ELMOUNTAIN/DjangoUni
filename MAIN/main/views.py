@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Author, Category, Post
+from .models import Author, Category, Post, Comment, Reply
 from .utils import update_views
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,13 @@ def home(request):
 
 def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    author = Author.objects.get(user=request.user)
+
+    if "comment-form" in request.POST:
+        comment = request.POST.get("comment")
+        new_comment, created = Comment.objects.get_or_create(user=author, content=comment)
+        post.comments.add(new_comment.id)
+    
     context = {
         "post":post
     }
@@ -44,6 +51,6 @@ def create_post(request):
             return redirect("home")
     context.update({
         "form": form,
-        "title": "OZONE: Create New Post"
+        "title": "RVGE: Create New Post"
     })
     return render(request, "create_post.html", context)

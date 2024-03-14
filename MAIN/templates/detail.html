@@ -34,11 +34,13 @@
         </div>
 
         <!--Comment Area-->
+    <form action="" method="post">
+        {% csrf_token %}
         <div class="comment-area hide" id="comment-area">
             <textarea name="comment" id="" placeholder="comment here ... "></textarea>
-            <input type="submit" value="submit">
+            <input type="submit" value="submit" name="comment-form">
         </div>
-
+    </form>
         <!--Comments Section-->
 
         {% for comment in post.comments.all %}
@@ -60,7 +62,14 @@
                 </div>
             </div>
         </div>
+        
         <!--Reply Area-->
+        <div class="comment-area hide" id="comment{{comment.id}}">
+            <textarea name="reply" id="" placeholder="post your reply here ....."></textarea>
+            <input type="submit" value="submit">
+        </div>
+        comment{{comment.id}}
+        <!--Reply Section-->
         {% for reply in comment.replies.all %}
         <div class="comments-container" style="width: 95%; margin-left:5%;">
             <div class="body">
