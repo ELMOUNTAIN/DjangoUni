@@ -1,3 +1,4 @@
+in VSCode use pip install then the name of the requirement (version numbers arnt import as they are the latest versions):
 asgiref==3.7.2
 colorama==0.4.6
 Django==5.0.3
