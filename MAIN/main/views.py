@@ -11,7 +11,10 @@ def home(request):
     num_posts = Post.objects.all().count()
     num_users = User.objects.all().count()
     num_categories = forums.count()
-    last_post = Post.objects.latest("date")
+    try:
+        last_post = Post.objects.latest("date")
+    except:
+        last_post = []
 
     context = {
         "forums":forums,
@@ -25,9 +28,9 @@ def home(request):
 
 def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    author = Author.objects.get(user=request.user)
-
-
+    if request.user.is_authenticated:
+        author = Author.objects.get(user=request.user)
+    
     if "comment-form" in request.POST:
         comment = request.POST.get("comment")
         new_comment, created = Comment.objects.get_or_create(user=author, content=comment)
@@ -95,3 +98,7 @@ def latest_posts(request):
         "title": "RetroVideoGameExchange: Latest 10 Posts"
     }
     return render(request, "latest_posts.html", context)
+
+def search_result(request):
+    
+    return render(request, "search.html")
