@@ -4,6 +4,7 @@ from .utils import update_views
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def home(request):
     forums = Category.objects.all()
@@ -48,6 +49,14 @@ def detail(request, slug):
 def posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Post.objects.filter(approved=True, categories=category)
+    paginator = Paginator(posts, 5)
+    page = request.GET.get("page")
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
 
     context = {
         "posts":posts,
@@ -62,13 +71,23 @@ def create_post(request):
     form = PostForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
+            print("\n\n its valid")
             author = Author.objects.get(user=request.user)
             new_post = form.save(commit=False)
             new_post.user = author
             new_post.save()
+            form.save_m2m()
             return redirect("home")
     context.update({
         "form": form,
         "title": "RVGE: Create New Post"
     })
     return render(request, "create_post.html", context)
+
+def latest_posts(request):
+    posts = Post.objects.all().filter(approved=True)[:10]
+    context = {
+        "posts":posts,
+        "title": "RetroVideoGameExchange: Latest 10 Posts"
+    }
+    return render(request, "latest_posts.html", context)

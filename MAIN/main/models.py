@@ -23,8 +23,8 @@ class Author(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.fullname)
-        super(Author, self).save(*args, **kwargs)
+            self.slug = slugify(self.title)
+        super(Category, self).save(*args, **kwargs)
 
 
 class Category(models.Model):

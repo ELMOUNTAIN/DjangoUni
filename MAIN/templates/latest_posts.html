@@ -4,7 +4,7 @@
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
-            <span><a href="{% url 'home' %}">{{forum.title}}</a> >> <a href="{{forum.get_url}}">{{forum.title}}</a></span>
+            <span>Latest 10 posts</span>
         </div>
         <!--Display posts table-->
         <div class="posts-table">
@@ -36,19 +36,5 @@
 
            
         </div>
-        <!--Pagination starts-->
-            <div class="pagination">
-                pages: <a href="">1</a><a href="">2</a><a href="">3</a>
-            </div>
-        <!--pagination ends-->
-    </div>
-
-    <div class="note">
-        <span><i class="fa fa-frown-o"></i>&nbsp; 0 Engagement Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-book"></i>&nbsp; Low Engagement Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-fire"></i>&nbsp; Popular Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-rocket"></i>&nbsp; High Engagement Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-lock"></i>&nbsp; Closed Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i class="fa fa-share-square"></i></a><br>
-    </div>
 
     {% endblock content %}
