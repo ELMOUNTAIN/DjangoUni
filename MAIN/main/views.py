@@ -3,11 +3,21 @@ from .models import Author, Category, Post, Comment, Reply
 from .utils import update_views
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def home(request):
     forums = Category.objects.all()
+    num_posts = Post.objects.all().count()
+    num_users = User.objects.all().count()
+    num_categories = forums.count()
+    last_post = Post.objects.latest("date")
+
     context = {
         "forums":forums,
+        "num_posts":num_posts,
+        "num_users":num_users,
+        "num_categories":num_categories,
+        "last_post":last_post,
     }
     return render(request, "forums.html", context)
 
@@ -19,7 +29,15 @@ def detail(request, slug):
         comment = request.POST.get("comment")
         new_comment, created = Comment.objects.get_or_create(user=author, content=comment)
         post.comments.add(new_comment.id)
-    
+
+    if "reply-form" in request.POST:
+        reply = request.POST.get("reply")
+        commenr_id = request.POST.get("comment-id")
+        comment_obj = Comment.objects.get(id=commenr_id)
+        new_reply, created = Reply.objects.get_or_create(user=author, content=reply)
+        comment_obj.replies.add(new_reply.id)
+
+
     context = {
         "post":post
     }
