@@ -19,12 +19,14 @@ def home(request):
         "num_users":num_users,
         "num_categories":num_categories,
         "last_post":last_post,
+        "title": "Home Page"
     }
     return render(request, "forums.html", context)
 
 def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     author = Author.objects.get(user=request.user)
+
 
     if "comment-form" in request.POST:
         comment = request.POST.get("comment")
@@ -40,7 +42,8 @@ def detail(request, slug):
 
 
     context = {
-        "post":post
+        "post":post,
+        "title":post.title
     }
     
     update_views (request, post)
@@ -61,6 +64,7 @@ def posts(request, slug):
     context = {
         "posts":posts,
         "forum": category,
+        "title": "posts"
     }
 
     return render(request, "posts.html", context)
