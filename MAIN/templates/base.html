@@ -20,7 +20,7 @@
                 <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
                 <ul class="nav-list">
                     <li class="nav-item"><a href="{% url 'home' %}">Home</a></li>
-                    {% if request.user.is_authenticated %}
+                    {% if user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li class="nav-item"><a href="{% url 'signup' %}">Signup</a></li>
@@ -29,9 +29,9 @@
                 </ul>
             </nav>
             <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
-            <div class="brand">Retro Video Game Exhange</div>
-            {% if request.user.is_authenticated %}
-            <div style="font-size:50px;font-weight:300px;margin-left:100px;"><a href="{% url 'create_post' %}">+</div>
+            <div class="brand">Retro Video Game Exchange</div>
+            {% if user.is_authenticated %}
+            <div style="font-size:50px;font-weight300px;margin-left:100px;"><a href="{% url 'create_post' %}">+</a></div>
             {% endif %}
         </div>
         <!--SearchBox Section-->

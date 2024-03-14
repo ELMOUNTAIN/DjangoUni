@@ -38,7 +38,6 @@ def signin(request):
 
 @login_required
 def update_profile(request):
-    context = {}
     user = request.user 
     form = UpdateForm(request.POST, request.FILES)
     if request.method == "POST":
